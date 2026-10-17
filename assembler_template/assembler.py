@@ -3,6 +3,7 @@ import json
 import os
 import re
 import shutil
+import shlex
 import subprocess
 import threading
 import urllib.request
@@ -227,7 +228,7 @@ class Assembler(tk.Tk):
                 command = CONFIG.get("server_command", "").strip()
                 if not command:
                     raise RuntimeError("Il comando del server è vuoto.")
-                subprocess.Popen(command, cwd=working_dir, shell=True)
+                subprocess.Popen(shlex.split(command), cwd=working_dir)
                 url = CONFIG.get("server_url", "").strip()
                 if url:
                     self.after(1200, lambda: webbrowser.open(url))
