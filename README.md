@@ -1,53 +1,53 @@
 # App Assembler Generator
 
-Generatore Windows in Python con interfaccia grafica. Crea un assemblatore personalizzato per ogni repository GitHub pubblica.
+Generatore Python con interfaccia grafica Tkinter che crea assemblatori personalizzati da terminale per repository GitHub pubbliche.
 
 ## Requisiti
 
-- Windows 10/11
-- Python 3.10 o successivo, con Tkinter disponibile
-- Connessione Internet per leggere e scaricare i branch GitHub
-
-Non sono richieste librerie Python esterne nella versione 0.1.
+- Windows 10/11 consigliato.
+- Python 3.10 o successivo, con Tkinter.
+- Connessione Internet per consultare e scaricare i branch GitHub.
+- Nessuna libreria Python esterna richiesta.
 
 ## Avvio
 
-1. Scarica questa repository con **Code → Download ZIP** ed estrai la cartella.
-2. Fai doppio clic su `avvia_generatore.bat`.
-3. Inserisci nome dell'app, URL GitHub e cartella di destinazione.
-4. Scegli file principale e modalità di avvio.
+1. Apri la repository e scegli **Code → Download ZIP**.
+2. Estrai l'archivio.
+3. Avvia `avvia_generatore.bat`.
+4. Compila le tre sezioni della finestra: app/repository, avvio, gestione file.
 5. Premi **Crea assemblatore**.
-6. Apri `bot/avvia_assemblatore.bat` nella cartella appena creata.
+6. Nella cartella creata, avvia `bot/avvia_assemblatore.bat`.
 
-## Cosa crea
+## Il generatore crea
 
-- `bot/`: assemblatore, configurazione JSON e file BAT di avvio
-- `versioni_0.x/`
-- `versione_1.0/`
-- `versioni_1.1_plus/`
-- `versioni_altre/` per branch non numerici o versioni non riconosciute
-- `backup/`: copie dei file testuali supportati, con suffisso `.txt`
+- `bot/assembler.py`: bot da terminale, non un'altra GUI.
+- `bot/config.json`: configurazione per repository, avvio e funzioni scelte.
+- `bot/avvia_assemblatore.bat`: avvio su Windows.
+- `versioni_0.x/`, `versione_1.0/`, `versioni_1.1_plus/`, `versioni_altre/`.
+- `backup/`: copie testuali con estensione aggiuntiva `.txt`.
 
-Le versioni originali mantengono i nomi e le estensioni dei file. I file binari vengono scaricati normalmente, ma non inclusi nel backup testuale.
+I file originali conservano nome ed estensione. I backup vengono creati soltanto per le estensioni testuali supportate. Il programma chiede conferma prima di sostituire una versione già scaricata.
 
-## Funzioni della versione 0.1
+## Funzioni configurabili
 
-- Interfaccia grafica Tkinter
-- Repository GitHub pubbliche
-- Elenco dei primi 100 branch
-- Download del branch selezionato
-- Backup testuali
-- Apertura del file principale, avvio server locale o entrambe le modalità
+Il bot può includere un menu di gestione file con le sole funzioni selezionate nel generatore: elenco, ricerca, apertura, copia, rinomina, eliminazione con conferma, creazione cartelle, backup/ripristino, riepilogo delle versioni e cronologia. Può inoltre mostrare comandi personalizzati inseriti nel formato:
 
-## Note
+`nome | descrizione | comando`
 
-- In modalità **Entrambi**, l'assemblatore apre il file configurato e avvia anche il server. Se l'app richiede un server, scegli **Server locale** per evitare di aprire il file direttamente.
-- Il comando del server viene eseguito nella cartella selezionata tramite configurazione. Esegui solo comandi che riconosci e di cui ti fidi.
-- Le cartelle di versioni non riconosciute vengono salvate in `versioni_altre/`.
-- Prima di sostituire una versione esistente, l'assemblatore chiede conferma e salva i file testuali esistenti nel backup.
+I comandi personalizzati eseguono un comando di sistema e richiedono una conferma esplicita. Inserisci solo comandi che capisci e di cui ti fidi.
 
-## Roadmap
+## Versioni GitHub
 
-- 0.2: paginazione branch e migliore riconoscimento versioni
-- 0.3: gestione server più chiara e selezione della cartella del progetto
-- 0.4: controlli di integrità e riepilogo dei file scaricati
+Il bot consulta i branch della repository e li scarica come ZIP. I branch numerici vengono raggruppati nelle cartelle previste; gli altri vanno in `versioni_altre/`. Il bot gestisce fino a 1000 branch tramite paginazione dell'API pubblica, nei limiti imposti da GitHub.
+
+## Avvio dell'app
+
+- **Apri file**: apre il file principale con il programma predefinito di Windows.
+- **Server locale**: avvia il comando configurato nella cartella relativa scelta e apre l'URL.
+- **Entrambi**: esegue entrambe le azioni.
+
+Usa soltanto repository e comandi affidabili. I programmi scaricati possono contenere codice eseguibile: il bot non li verifica come sicuri.
+
+## Nota sullo stato
+
+Il codice viene pubblicato su GitHub, ma deve ancora essere provato sul computer Windows di chi lo utilizza. Se qualcosa non funziona, conserva il messaggio d'errore completo per correggerlo in modo riproducibile.
