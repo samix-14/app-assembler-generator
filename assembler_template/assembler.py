@@ -243,7 +243,11 @@ def resolve_path(raw):
     candidate = Path(raw).expanduser()
     if not candidate.is_absolute():
         candidate = APP_ROOT / candidate
-    return candidate.resolve()
+    resolved = candidate.resolve()
+    root = APP_ROOT.resolve()
+    if resolved != root and root not in resolved.parents:
+        raise ValueError("Per sicurezza, la gestione file è limitata alla cartella dell'app generata.")
+    return resolved
 
 
 def file_manager():
