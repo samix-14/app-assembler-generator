@@ -123,8 +123,6 @@ class Generator(tk.Tk):
     def _entry(parent, row, label, variable, hint):
         ttk.Label(parent, text=label).grid(row=row, column=0, sticky="w", pady=9)
         ttk.Entry(parent, textvariable=variable).grid(row=row, column=1, columnspan=2, sticky="ew", padx=10, pady=9)
-        if hint:
-            ttk.Label(parent, text=hint, foreground="#777").grid(row=row, column=1, columnspan=2, sticky="w", padx=10, pady=(29, 0))
 
     def _choose_parent(self):
         selected = filedialog.askdirectory(title="Scegli la cartella in cui creare il bot")
@@ -199,7 +197,7 @@ class Generator(tk.Tk):
             with open(os.path.join(bot_dir, "config.json"), "w", encoding="utf-8") as stream:
                 json.dump(config, stream, indent=2, ensure_ascii=False)
             with open(os.path.join(bot_dir, "avvia_assemblatore.bat"), "w", encoding="utf-8", newline="") as stream:
-                stream.write('@echo off\\r\\ncd /d "%~dp0"\\r\\npy assembler.py\\r\\nif errorlevel 1 python assembler.py\\r\\nif errorlevel 1 pause\\r\\n')
+                stream.write('@echo off\r\ncd /d "%~dp0"\r\npy assembler.py\r\nif errorlevel 1 python assembler.py\r\nif errorlevel 1 pause\r\n')
             if self.make_readme.get():
                 content = f"""ASSEMBLATORE: {app_name}
 
